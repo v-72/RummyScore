@@ -19,7 +19,7 @@ class HomeScreen extends React.Component {
             <Button
               title="New Game"
               color="#90a4ae"
-              onPress={() => navigate('NewGame', { name: 'Jane' })}
+              onPress={() => navigate('NewGame', {})}
             />
           </View>
           <Separator />
