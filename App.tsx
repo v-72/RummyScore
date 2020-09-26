@@ -1,28 +1,29 @@
 import React from 'react';
-import { StyleSheet, Button, View, SafeAreaView, Text, Alert } from 'react-native';
-
+import { StyleSheet, Button, View, SafeAreaView, Text, Alert, ImageBackground} from 'react-native';
+import {UselessTextInput} from './screens/new_game';
 const Separator = () => (
   <View style={styles.separator} />
 );
 
 const App = () => (
   <SafeAreaView style={styles.container}>
+    <ImageBackground source={require('./assets/background.png')}  style={styles.image}>
     <View>
-           <Text style={styles.titleHead}>RummyScore</Text>
+           <Text style={styles.titleHead}>Rummy Score</Text>
     </View>
     
     <View style={styles.view}>
       <Button
         title="New Game" 
-        color="#0097a7"
+        color="#90a4ae"
         onPress={() => Alert.alert('Under construction')}
       />
     </View>
     <Separator />
     <View style={styles.view}>
       <Button
-        title="Previous Games"
-        color="#0097a7"
+        title="History"
+        color="#90a4ae"
         onPress={() => Alert.alert('Under construction')}
       />
     </View>
@@ -30,7 +31,7 @@ const App = () => (
     <View style={styles.view}>
     <Button
         title="Help"
-        color="#0097a7"
+        color="#90a4ae"
         onPress={() => Alert.alert('Nothing\'s there to help yet')}
       />
     </View>
@@ -38,13 +39,14 @@ const App = () => (
     <View style={styles.view}>
     <Button
         title="About"
-        color="#0097a7"
+        color="#90a4ae"
         onPress={() => Alert.alert('Alchemy Studios \nApp version: v0.1.0')}
       />
     </View>
     <View>
-      <Text style={{marginTop: 10,textAlign:"right", marginHorizontal: 16}}>v0.0.1</Text>
+      <Text style={{marginTop: 10,textAlign:"right", marginHorizontal: 16, color: "#fff8e1"}}>v0.0.1</Text>
     </View>
+    </ImageBackground>
   </SafeAreaView>
 );
 
@@ -53,7 +55,7 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: 'center',
     // marginHorizontal: 16,
-    backgroundColor:"#e3f2fd"
+    backgroundColor:"#e3f2fd",
   },
   title: {
     textAlign: 'center',
@@ -70,15 +72,24 @@ const styles = StyleSheet.create({
     marginHorizontal: 16,
   },
   titleHead: {
-    color:"#0097a7",
-    textAlign:"center", 
+    color:"#fff8e1",
+    textAlign:"center",
+    marginTop: 50,
     marginBottom: 100, 
-    fontSize:30, 
-    fontWeight:"bold"
+    fontSize:40, 
+    fontWeight:"bold",
+    borderColor: "#fff",
+    borderWidth: 3,
+    backgroundColor: "#000"
   },
   view:{
-    marginHorizontal: 16,
-  }
+    marginHorizontal: 16
+  },
+  image: {
+    flex: 1,
+    resizeMode: "cover",
+    justifyContent: "center"
+  },
 });
 
 export default App;
