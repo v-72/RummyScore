@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+const generate = require('project-name-generator');
 import {
   Alert,
   Modal,
@@ -11,21 +12,45 @@ import {
 } from "react-native";
 
 export default class NewGame extends React.Component {
-  constructor(props) {
+  constructor(props: any) {
     super(props);
     this.state = {
-      gameName: "",
-      numPlayers: 0,
+      playerNames: [],
+      gameName: this.generateRandomGameName(),
+      numPlayers: "2",
       modalVisible: true,
-      defaultName: "Game 1",
-      defaultPlayers: "2"
+      modalErrorText: ""
     };
     this.setModalVisible = this.setModalVisible.bind(this);
     this.renderModal = this.renderModal.bind(this);
+    this.setGameDetails = this.setGameDetails.bind(this);
+    this.generatePlayerNames = this.generatePlayerNames.bind(this);
+    this.generateRandomGameName = this.generateRandomGameName.bind(this);
+  }
+  generateRandomGameName() {
+    return generate().dashed;
   }
 
-  setModalVisible(modalVisible) {
-    this.setState({ modalVisible })
+  setModalVisible(modalVisible: Boolean) {
+    this.setState({ modalVisible });
+  }
+
+  setGameDetails() {
+    const np = parseInt(this.state.numPlayers);
+    if (np > 12 || np < 2) {
+      this.setState({ modalErrorText: "There should be atleast 2 players and upto 12." })
+      return;
+    }
+    this.setState({ modalVisible: false });
+    this.generatePlayerNames();
+    return;
+  }
+
+  generatePlayerNames() {
+    const playerNames = [...Array(this.state.numPlayers).keys()].map((i) => {
+      return `Player${i}`
+    })
+    this.setState({ playerNames });
   }
 
   renderModal() {
@@ -44,15 +69,20 @@ export default class NewGame extends React.Component {
             <TextInput
               style={{ height: 40, borderColor: 'gray', borderWidth: 1, width: "90%" }}
               maxLength={20}
-              defaultValue={this.state.defaultName}
+              defaultValue={this.state.gameName}
+              onChangeText={(text) => this.setState({ gameName: text })}
             />
             <Text style={styles.modalText}>Number of Players:</Text>
             <TextInput
               style={{ height: 40, borderColor: 'gray', borderWidth: 1, width: "90%" }}
               textContentType={"password"}
               keyboardType={"numeric"}
-              defaultValue={this.state.defaultPlayers}
+              maxLength={2}
+              autoFocus={true}
+              defaultValue={this.state.numPlayers}
+              onChangeText={(text) => this.setState({ numPlayers: text })}
             />
+            <Text style={{ color: "red" }}>{this.state.modalErrorText}</Text>
             <View style={styles.fixToText}>
               <TouchableHighlight
                 style={{ ...styles.openButton, backgroundColor: "#e57373" }}
@@ -65,7 +95,7 @@ export default class NewGame extends React.Component {
               <TouchableHighlight
                 style={{ ...styles.openButton, backgroundColor: "#43a047", position: "absolute", left: "80%" }}
                 onPress={() => {
-                  this.setModalVisible(!this.state.modalVisible);
+                  this.setGameDetails(!this.state.modalVisible);
                 }}
               >
                 <Text style={styles.textStyle}>Done</Text>
@@ -76,10 +106,14 @@ export default class NewGame extends React.Component {
       </Modal>
     )
   }
+
+
   render() {
     return (
       <View style={{ flex: 1, alignItems: "center", justifyContent: "center" }}>
-        {this.renderModal()}
+        {
+          this.renderModal()
+        }
       </View>
     );
   }
