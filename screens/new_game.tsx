@@ -1,16 +1,12 @@
 import React, { Component } from 'react';
-import { TextInput } from 'react-native';
+import { View,Text } from 'react-native';
 
-const UselessTextInput = () => {
-  const [value, onChangeText] = React.useState('Useless Placeholder');
-
-  return (
-    <TextInput
-      style={{ height: 40, borderColor: 'gray', borderWidth: 1 }}
-      onChangeText={text => onChangeText(text)}
-      value={value}
-    />
-  );
-}
-
-export default UselessTextInput;
+export default class NewGame extends React.Component {  
+    render() {  
+        return (  
+            <View style={{ flex: 1, alignItems: "center", justifyContent: "center" }}>  
+                <Text>Profile Screen</Text>  
+            </View>  
+    );  
+    }  
+}  

@@ -1,6 +1,8 @@
 import React from 'react';
 import { StyleSheet, Button, View, SafeAreaView, Text, Alert, ImageBackground} from 'react-native';
-import {UselessTextInput} from './screens/new_game';
+import {HomeScreen,NewGame} from './screens/';
+import { createStackNavigator, createAppContainer } from 'react-navigation';
+
 const Separator = () => (
   <View style={styles.separator} />
 );
@@ -16,7 +18,7 @@ const App = () => (
       <Button
         title="New Game" 
         color="#90a4ae"
-        onPress={() => Alert.alert('Under construction')}
+        onPress={() => this.props.navigation.push('Profile')}
       />
     </View>
     <Separator />
@@ -92,4 +94,15 @@ const styles = StyleSheet.create({
   },
 });
 
+
+const AppNavigator = createStackNavigator(  
+  {  
+      Home: HomeScreen,  
+      NewGame: NewGame  
+  },  
+  {  
+      initialRouteName: "HomeScreen"  
+  }  
+); 
+const AppContainer = createAppContainer(AppNavigator);  
 export default App;
