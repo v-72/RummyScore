@@ -5,7 +5,9 @@ import {
   StyleSheet,
   Text,
   TouchableHighlight,
-  View
+  View,
+  TextInput,
+  Button
 } from "react-native";
 
 export default class NewGame extends React.Component {
@@ -14,7 +16,9 @@ export default class NewGame extends React.Component {
     this.state = {
       gameName: "",
       numPlayers: 0,
-      modalVisible: true
+      modalVisible: true,
+      defaultName: "Game 1",
+      defaultPlayers: "2"
     };
     this.setModalVisible = this.setModalVisible.bind(this);
     this.renderModal = this.renderModal.bind(this);
@@ -24,39 +28,64 @@ export default class NewGame extends React.Component {
     this.setState({ modalVisible })
   }
 
-  renderModal(){
-    return(
+  renderModal() {
+    return (
       <Modal
-      animationType="slide"
-      transparent={true}
-      visible={this.state.modalVisible}
-      onRequestClose={() => {
-        Alert.alert("Modal has been closed.");
-      }}
-    >
-      <View style={styles.centeredView}>
-        <View style={styles.modalView}>
-          <Text style={styles.modalText}>New Game</Text>
-
-          <TouchableHighlight
-            style={{ ...styles.openButton, backgroundColor: "#2196F3" }}
-            onPress={() => {
-              this.setModalVisible(!this.state.modalVisible);
-            }}
-          >
-            <Text style={styles.textStyle}>Submit</Text>
-          </TouchableHighlight>
-          <TouchableHighlight
-            style={{ ...styles.openButton, backgroundColor: "#2196F3" }}
-            onPress={() => {
-              this.setModalVisible(!this.state.modalVisible);
-            }}
-          >
-            <Text style={styles.textStyle}>Cancel</Text>
-          </TouchableHighlight>
+        animationType="fade"
+        transparent={true}
+        visible={this.state.modalVisible}
+        onRequestClose={() => {
+          Alert.alert("Modal has been closed.");
+        }}
+      >
+        <View style={styles.centeredView}>
+          <View style={styles.modalView}>
+            <Text style={styles.modalText}>Game Name:</Text>
+            <TextInput
+              style={{ height: 40, borderColor: 'gray', borderWidth: 1, width: "90%"}}
+              maxLength={20}
+              defaultValue={this.state.defaultName}
+            />
+            <Text style={styles.modalText}>Number of Players:</Text>
+            <TextInput
+              style={{ height: 40, borderColor: 'gray', borderWidth: 1, width: "90%" }}
+              textContentType={"password"}
+              keyboardType={"numeric"}
+              defaultValue={this.state.defaultPlayers}
+            />
+            <View style={styles.fixToText}>
+              {/* <Button
+                title="Cancel"
+                onPress={() => {
+                  this.setModalVisible(!this.state.modalVisible);
+                }}
+              />
+              <Button
+                title="Done"
+                onPress={() => {
+                  this.setModalVisible(!this.state.modalVisible);
+                }}
+              /> */}
+              <TouchableHighlight
+                style={{ ...styles.openButton, backgroundColor: "#e57373" }}
+                onPress={() => {
+                  this.setModalVisible(!this.state.modalVisible);
+                }}
+              >
+                <Text style={styles.textStyle}>Cancel</Text>
+              </TouchableHighlight>
+              <TouchableHighlight
+                style={{ ...styles.openButton, backgroundColor: "#43a047",position: "absolute",left: "80%"}}
+                onPress={() => {
+                  this.setModalVisible(!this.state.modalVisible);
+                }}
+              >
+                <Text style={styles.textStyle}>Done</Text>
+              </TouchableHighlight>
+            </View>
+          </View>
         </View>
-      </View>
-    </Modal>
+      </Modal>
     )
   }
   render() {
@@ -77,10 +106,11 @@ const styles = StyleSheet.create({
   },
   modalView: {
     margin: 20,
+    marginLeft: 30,
     backgroundColor: "white",
     borderRadius: 20,
     padding: 35,
-    alignItems: "center",
+    alignItems: "baseline",
     shadowColor: "#000",
     shadowOffset: {
       width: 0,
@@ -88,7 +118,8 @@ const styles = StyleSheet.create({
     },
     shadowOpacity: 0.25,
     shadowRadius: 3.84,
-    elevation: 5
+    elevation: 5,
+    width: "90%"
   },
   openButton: {
     backgroundColor: "#F194FF",
@@ -99,10 +130,22 @@ const styles = StyleSheet.create({
   textStyle: {
     color: "white",
     fontWeight: "bold",
-    textAlign: "center"
+    textAlign: "left"
   },
   modalText: {
-    marginBottom: 15,
-    textAlign: "center"
-  }
+    marginBottom: 5,
+    marginTop: 10,
+    fontWeight: "bold",
+    textAlign: "left"
+  },
+  fixToText: {
+    marginTop: 50,
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+  },
+  container: {
+    flex: 1,
+    justifyContent: 'center',
+    marginHorizontal: 16,
+  },
 });
