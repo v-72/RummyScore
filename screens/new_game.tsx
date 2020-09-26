@@ -7,7 +7,7 @@ import {
   TouchableHighlight,
   View,
   TextInput,
-  Button
+  Image
 } from "react-native";
 
 export default class NewGame extends React.Component {
@@ -42,7 +42,7 @@ export default class NewGame extends React.Component {
           <View style={styles.modalView}>
             <Text style={styles.modalText}>Game Name:</Text>
             <TextInput
-              style={{ height: 40, borderColor: 'gray', borderWidth: 1, width: "90%"}}
+              style={{ height: 40, borderColor: 'gray', borderWidth: 1, width: "90%" }}
               maxLength={20}
               defaultValue={this.state.defaultName}
             />
@@ -54,18 +54,6 @@ export default class NewGame extends React.Component {
               defaultValue={this.state.defaultPlayers}
             />
             <View style={styles.fixToText}>
-              {/* <Button
-                title="Cancel"
-                onPress={() => {
-                  this.setModalVisible(!this.state.modalVisible);
-                }}
-              />
-              <Button
-                title="Done"
-                onPress={() => {
-                  this.setModalVisible(!this.state.modalVisible);
-                }}
-              /> */}
               <TouchableHighlight
                 style={{ ...styles.openButton, backgroundColor: "#e57373" }}
                 onPress={() => {
@@ -75,7 +63,7 @@ export default class NewGame extends React.Component {
                 <Text style={styles.textStyle}>Cancel</Text>
               </TouchableHighlight>
               <TouchableHighlight
-                style={{ ...styles.openButton, backgroundColor: "#43a047",position: "absolute",left: "80%"}}
+                style={{ ...styles.openButton, backgroundColor: "#43a047", position: "absolute", left: "80%" }}
                 onPress={() => {
                   this.setModalVisible(!this.state.modalVisible);
                 }}
