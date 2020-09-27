@@ -11,6 +11,7 @@ import {
   Picker
 } from "react-native";
 
+import Table from './table';
 export default class NewGame extends React.Component {
   constructor(props: any) {
     super(props);
@@ -119,10 +120,17 @@ export default class NewGame extends React.Component {
     )
   }
 
+  generateGrid(){
+
+  }
+
   renderHelper(){
     if(this.state.playerNames.length >= 2){
+        // Alert.alert(this.state.playerNames)
         return (
-        <Text>{this.state.numPlayers}-{this.state.numRounds}-{this.state.playerNames}</Text>
+          <Table numPlayers={this.state.numPlayers} 
+                players={this.state.playerNames} 
+                rounds={this.state.numRounds}/>
         )
     }else{
       return this.renderModal()
