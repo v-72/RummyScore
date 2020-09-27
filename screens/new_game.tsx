@@ -52,7 +52,7 @@ export default class NewGame extends React.Component {
 
   generatePlayerNames() {
     const playerNames = [...Array(parseInt(this.state.numPlayers)).keys()].map((i) => {
-      return `Player${i}`
+      return `Player ${i+1}`
     })
     this.setState({ playerNames });
   }
