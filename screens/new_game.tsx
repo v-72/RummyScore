@@ -8,7 +8,7 @@ import {
   TouchableHighlight,
   View,
   TextInput,
-  Image
+  Picker
 } from "react-native";
 
 export default class NewGame extends React.Component {
@@ -17,8 +17,10 @@ export default class NewGame extends React.Component {
     this.state = {
       playerNames: [],
       gameName: this.generateRandomGameName(),
+      numRounds: "13",
       numPlayers: "2",
       modalVisible: true,
+      numRoundsDefault: ["7", "13"],
       modalErrorText: ""
     };
     this.setModalVisible = this.setModalVisible.bind(this);
@@ -26,6 +28,7 @@ export default class NewGame extends React.Component {
     this.setGameDetails = this.setGameDetails.bind(this);
     this.generatePlayerNames = this.generatePlayerNames.bind(this);
     this.generateRandomGameName = this.generateRandomGameName.bind(this);
+    this.renderHelper = this.renderHelper.bind(this);
   }
   generateRandomGameName() {
     return generate().dashed;
@@ -47,7 +50,7 @@ export default class NewGame extends React.Component {
   }
 
   generatePlayerNames() {
-    const playerNames = [...Array(this.state.numPlayers).keys()].map((i) => {
+    const playerNames = [...Array(parseInt(this.state.numPlayers)).keys()].map((i) => {
       return `Player${i}`
     })
     this.setState({ playerNames });
@@ -82,6 +85,15 @@ export default class NewGame extends React.Component {
               defaultValue={this.state.numPlayers}
               onChangeText={(text) => this.setState({ numPlayers: text })}
             />
+            <Text style={styles.modalText}>Number of Rounds:</Text>
+            <Picker
+              selectedValue={this.state.numRounds}
+              style={{ height: 50, width: 150 }}
+              onValueChange={(itemValue, itemIndex) => this.setState({numRounds:itemValue})}
+            >
+              <Picker.Item label="7" value="7" />
+              <Picker.Item label="13" value="13" />
+            </Picker>
             <Text style={{ color: "red" }}>{this.state.modalErrorText}</Text>
             <View style={styles.fixToText}>
               <TouchableHighlight
@@ -107,12 +119,21 @@ export default class NewGame extends React.Component {
     )
   }
 
+  renderHelper(){
+    if(this.state.playerNames.length >= 2){
+        return (
+        <Text>{this.state.numPlayers}-{this.state.numRounds}-{this.state.playerNames}</Text>
+        )
+    }else{
+      return this.renderModal()
+    }
+  }
 
   render() {
     return (
       <View style={{ flex: 1, alignItems: "center", justifyContent: "center" }}>
         {
-          this.renderModal()
+          this.renderHelper()
         }
       </View>
     );
