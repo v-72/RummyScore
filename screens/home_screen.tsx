@@ -5,6 +5,7 @@ const Separator = () => (
   <View style={styles.separator} />
 );
 
+
 class HomeScreen extends React.Component {
   render() {
     const { navigate } = this.props.navigation;

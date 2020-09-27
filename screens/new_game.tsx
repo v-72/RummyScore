@@ -71,14 +71,14 @@ export default class NewGame extends React.Component {
           <View style={styles.modalView}>
             <Text style={styles.modalText}>Game Name:</Text>
             <TextInput
-              style={{ height: 40, borderColor: 'gray', borderWidth: 1, width: "90%" }}
+              style={styles.inputStyle}
               maxLength={20}
               defaultValue={this.state.gameName}
               onChangeText={(text) => this.setState({ gameName: text })}
             />
             <Text style={styles.modalText}>Number of Players:</Text>
             <TextInput
-              style={{ height: 40, borderColor: 'gray', borderWidth: 1, width: "90%" }}
+              style={styles.inputStyle}
               textContentType={"password"}
               keyboardType={"numeric"}
               maxLength={2}
@@ -89,7 +89,7 @@ export default class NewGame extends React.Component {
             <Text style={styles.modalText}>Number of Rounds:</Text>
             <Picker
               selectedValue={this.state.numRounds}
-              style={{ height: 50, width: 150 }}
+              style={styles.inputStyle}
               onValueChange={(itemValue, itemIndex) => this.setState({numRounds:itemValue})}
             >
               <Picker.Item label="7" value="7" />
@@ -153,7 +153,8 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: "center",
     alignItems: "center",
-    marginTop: 22
+    marginTop: 22,
+    marginBottom: 100
   },
   modalView: {
     margin: 20,
@@ -198,5 +199,12 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: 'center',
     marginHorizontal: 16,
+  },
+  inputStyle:{ 
+    height: 40, 
+    borderColor: 'gray', 
+    borderWidth: 0.5, 
+    width: "90%",
+    paddingLeft: 20
   },
 });
