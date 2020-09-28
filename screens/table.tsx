@@ -1,21 +1,73 @@
 import React from 'react';
-import { StyleSheet, Button, View, SafeAreaView, Text, Alert, ScrollView } from 'react-native';
+import { 
+    StyleSheet, 
+    Button, 
+    View, 
+    SafeAreaView, 
+    Text, 
+    Alert, 
+    ScrollView, 
+    Modal 
+} from 'react-native';
 
 export default class Table extends React.Component {
-    getCell(player) {
+    constructor(props:any){
+        super(props);
+        this.state ={
+            modalVisible: true
+        }
+    }
+
+    renderModal() {
+       return (
+          <Modal
+            animationType="fade"
+            transparent={true}
+            visible={true}
+          >
+            <View >
+                <Text>Test</Text>
+            </View>
+          </Modal>
+        )
+      }
+
+    handlePlayerName(i){
+        if(i !== "Round"){
+            this.renderModal()
+        }
+    }
+
+    getHeaderCell(player:string) {
         return (
             <View style={styles.cell}>
-                <Text style={{ fontWeight: "bold",alignSelf:"center"}} onPress={() => { Alert.alert("df") }}>{player}</Text>
+                <Text 
+                    style={{ fontWeight: "bold",alignSelf:"center"}} 
+                    onPress={(i) => {this.handlePlayerName(player)}}>
+                        {player}
+                </Text>
             </View>
         )
     }
 
-    renderHeader(i) {
+    getCell(val:any) {
+        return (
+            <View style={styles.cell}>
+                <Text 
+                    style={{ fontWeight: "bold",alignSelf:"center"}} 
+                    onPress={() => { Alert.alert("df") }}>
+                        {val}
+                </Text>
+            </View>
+        )
+    }
+
+    renderHeader(i:any) {
         return (<View style={styles.row} key={i}>
-            {this.getCell("Round")}
+            {this.getHeaderCell("Round")}
             {
                 this.props.players.map((player, i) => {
-                    return this.getCell(player);
+                    return this.getHeaderCell(player);
                 })
             }
         </View>
@@ -81,4 +133,11 @@ const styles = StyleSheet.create({
     scrollView: {
         marginHorizontal: 20,
     },
+    centeredView: {
+        flex: 1,
+        justifyContent: "center",
+        alignItems: "center",
+        marginTop: 22,
+        marginBottom: 100
+      },
 });

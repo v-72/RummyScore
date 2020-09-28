@@ -5,7 +5,7 @@ const Separator = () => (
   <View style={styles.separator} />
 );
 
-
+const APP_VERSION = "v0.0.1"
 class HomeScreen extends React.Component {
   render() {
     const { navigate } = this.props.navigation;
@@ -44,11 +44,11 @@ class HomeScreen extends React.Component {
             <Button
               title="About"
               color="#90a4ae"
-              onPress={() => Alert.alert('Alchemy Studios \nApp version: v0.1.0')}
+              onPress={() => Alert.alert(`Alchemy Studios \nApp version: ${APP_VERSION}`)}
             />
           </View>
           <View>
-            <Text style={{ marginTop: 10, textAlign: "right", marginHorizontal: 16, color: "#fff8e1" }}>v0.0.1</Text>
+            <Text style={{ marginTop: 10, textAlign: "right", marginHorizontal: 16, color: "#fff8e1" }}>{APP_VERSION}</Text>
           </View>
         </ImageBackground>
       </SafeAreaView>

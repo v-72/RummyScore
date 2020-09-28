@@ -22,10 +22,11 @@ export default class NewGame extends React.Component {
       numPlayers: "2",
       modalVisible: true,
       numRoundsDefault: ["7", "13"],
-      modalErrorText: ""
+      modalErrorText: "",
+      getPlayerDetails: true
     };
     this.setModalVisible = this.setModalVisible.bind(this);
-    this.renderModal = this.renderModal.bind(this);
+    this.renderGameDetails = this.renderGameDetails.bind(this);
     this.setGameDetails = this.setGameDetails.bind(this);
     this.generatePlayerNames = this.generatePlayerNames.bind(this);
     this.generateRandomGameName = this.generateRandomGameName.bind(this);
@@ -57,7 +58,7 @@ export default class NewGame extends React.Component {
     this.setState({ playerNames });
   }
 
-  renderModal() {
+  renderGameDetails() {
     return (
       <Modal
         animationType="fade"
@@ -120,8 +121,23 @@ export default class NewGame extends React.Component {
     )
   }
 
-  generateGrid(){
-
+  renderPlayerDetails(){
+      return(
+        <Modal
+        animationType="fade"
+        transparent={true}
+        visible={true}
+        onRequestClose={() => {
+          Alert.alert("Modal has been closed.");
+        }}
+      >
+         <View style={styles.centeredView}>
+         <View style={styles.modalView}>
+          <Text>Test</Text>
+          </View>
+          </View>
+        </Modal>
+      )
   }
 
   renderHelper(){
@@ -132,8 +148,10 @@ export default class NewGame extends React.Component {
                 players={this.state.playerNames} 
                 rounds={this.state.numRounds}/>
         )
+    }else if(this.state.getPlayerDetails){
+      return this.renderPlayerDetails();
     }else{
-      return this.renderModal()
+      return this.renderGameDetails();
     }
   }
 
