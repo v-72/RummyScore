@@ -8,7 +8,10 @@ import {
   TouchableHighlight,
   View,
   TextInput,
-  Picker
+  Picker,
+  SafeAreaView,
+  ScrollView
+
 } from "react-native";
 
 import Table from './table';
@@ -23,7 +26,7 @@ export default class NewGame extends React.Component {
       modalVisible: true,
       numRoundsDefault: ["7", "13"],
       modalErrorText: "",
-      getPlayerDetails: true
+      getPlayerDetails: false
     };
     this.setModalVisible = this.setModalVisible.bind(this);
     this.renderGameDetails = this.renderGameDetails.bind(this);
@@ -52,10 +55,11 @@ export default class NewGame extends React.Component {
   }
 
   generatePlayerNames() {
+    const getPlayerDetails = true;
     const playerNames = [...Array(parseInt(this.state.numPlayers)).keys()].map((i) => {
-      return `Player ${i+1}`
+      return `Player ${i + 1}`
     })
-    this.setState({ playerNames });
+    this.setState({ playerNames, getPlayerDetails });
   }
 
   renderGameDetails() {
@@ -91,7 +95,7 @@ export default class NewGame extends React.Component {
             <Picker
               selectedValue={this.state.numRounds}
               style={styles.inputStyle}
-              onValueChange={(itemValue, itemIndex) => this.setState({numRounds:itemValue})}
+              onValueChange={(itemValue, itemIndex) => this.setState({ numRounds: itemValue })}
             >
               <Picker.Item label="7" value="7" />
               <Picker.Item label="13" value="13" />
@@ -121,9 +125,9 @@ export default class NewGame extends React.Component {
     )
   }
 
-  renderPlayerDetails(){
-      return(
-        <Modal
+  renderPlayerDetails() {
+    return (
+      <Modal
         animationType="fade"
         transparent={true}
         visible={true}
@@ -131,26 +135,43 @@ export default class NewGame extends React.Component {
           Alert.alert("Modal has been closed.");
         }}
       >
-         <View style={styles.centeredView}>
-         <View style={styles.modalView}>
-          <Text>Test</Text>
-          </View>
-          </View>
-        </Modal>
-      )
+        <SafeAreaView style={styles.container}>
+          <ScrollView style={styles.scrollView}>
+            <View style={styles.modalView}>
+              {
+                [...Array(parseInt(this.state.numPlayers)).keys()].map((i) => {
+                  return (
+                    <View>
+                      <Text style={styles.modalText}>{this.state.playerNames[i]}</Text>
+                      <TextInput
+                        style={styles.inputStyle}
+                        maxLength={20}
+                        autoFocus={true}
+                        defaultValue={this.state.playerNames[i]}
+                        onChangeText={(text) => this.setState({ numPlayers: text })}
+                      />
+                    </View>
+                  )
+                })
+              }
+            </View>
+          </ScrollView>
+        </SafeAreaView>
+      </Modal>
+    )
   }
 
-  renderHelper(){
-    if(this.state.playerNames.length >= 2){
-        // Alert.alert(this.state.playerNames)
-        return (
-          <Table numPlayers={this.state.numPlayers} 
-                players={this.state.playerNames} 
-                rounds={this.state.numRounds}/>
-        )
-    }else if(this.state.getPlayerDetails){
+  renderHelper() {
+    if (this.state.getPlayerDetails) {
       return this.renderPlayerDetails();
-    }else{
+    } else if (this.state.playerNames.length >= 2) {
+      // Alert.alert(this.state.playerNames)
+      return (
+        <Table numPlayers={this.state.numPlayers}
+          players={this.state.playerNames}
+          rounds={this.state.numRounds} />
+      )
+    } else {
       return this.renderGameDetails();
     }
   }
@@ -218,11 +239,14 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     marginHorizontal: 16,
   },
-  inputStyle:{ 
-    height: 40, 
-    borderColor: 'gray', 
-    borderWidth: 0.5, 
+  inputStyle: {
+    height: 40,
+    borderColor: 'gray',
+    borderWidth: 0.5,
     width: "90%",
     paddingLeft: "5%"
+  },
+  scrollView: {
+    marginHorizontal: 20,
   },
 });
