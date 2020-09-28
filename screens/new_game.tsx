@@ -79,6 +79,7 @@ export default class NewGame extends React.Component {
             <TextInput
               style={styles.inputStyle}
               maxLength={20}
+              selectTextOnFocus
               defaultValue={this.state.gameName}
               onChangeText={(text) => this.setState({ gameName: text })}
             />
@@ -147,7 +148,7 @@ export default class NewGame extends React.Component {
                     <TextInput
                       style={styles.inputStyle}
                       maxLength={20}
-                      autoFocus={true}
+                      selectTextOnFocus
                       defaultValue={this.state.playerNames[i]}
                       onChangeText={(text) => {
                         this.state.playerNames[i] = text
