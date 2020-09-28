@@ -6,12 +6,12 @@ import {createStackNavigator} from 'react-navigation-stack';
 
 const AppNavigator = createStackNavigator(  
   {  
-    HomeScreen: HomeScreen,  
-      NewGame: NewGame  
+    "Rummy Score": HomeScreen,  
+    "New Game": NewGame  
   },  
   {  
-      initialRouteName: "HomeScreen"  
-  }  
+      initialRouteName: "Rummy Score"
+  }
 ); 
 const AppContainer = createAppContainer(AppNavigator);  
 

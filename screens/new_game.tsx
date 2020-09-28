@@ -205,6 +205,6 @@ const styles = StyleSheet.create({
     borderColor: 'gray', 
     borderWidth: 0.5, 
     width: "90%",
-    paddingLeft: 20
+    paddingLeft: "5%"
   },
 });
