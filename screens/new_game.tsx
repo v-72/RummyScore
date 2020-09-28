@@ -26,7 +26,8 @@ export default class NewGame extends React.Component {
       modalVisible: true,
       numRoundsDefault: ["7", "13"],
       modalErrorText: "",
-      getPlayerDetails: false
+      getPlayerDetails: false,
+      playerDetailsModal: true
     };
     this.setModalVisible = this.setModalVisible.bind(this);
     this.renderGameDetails = this.renderGameDetails.bind(this);
@@ -129,33 +130,44 @@ export default class NewGame extends React.Component {
     return (
       <Modal
         animationType="fade"
-        transparent={true}
-        visible={true}
+        transparent={false}
+        visible={this.state.playerDetailsModal}
         onRequestClose={() => {
           Alert.alert("Modal has been closed.");
         }}
       >
-        <SafeAreaView style={styles.container}>
-          <ScrollView style={styles.scrollView}>
-            <View style={styles.modalView}>
-              {
-                [...Array(parseInt(this.state.numPlayers)).keys()].map((i) => {
-                  return (
-                    <View>
-                      <Text style={styles.modalText}>{this.state.playerNames[i]}</Text>
-                      <TextInput
-                        style={styles.inputStyle}
-                        maxLength={20}
-                        autoFocus={true}
-                        defaultValue={this.state.playerNames[i]}
-                        onChangeText={(text) => this.setState({ numPlayers: text })}
-                      />
-                    </View>
-                  )
-                })
-              }
+        <SafeAreaView style={styles.modalView}>
+        <ScrollView style={styles.scrollView}>
+        <Text style={{fontWeight: "bold"}}>Please enter player names</Text>
+            {
+              [...Array(parseInt(this.state.numPlayers)).keys()].map((i) => {
+                return (
+                  <View>
+                    <Text style={styles.modalText}>{this.state.playerNames[i]}</Text>
+                    <TextInput
+                      style={styles.inputStyle}
+                      maxLength={20}
+                      autoFocus={true}
+                      defaultValue={this.state.playerNames[i]}
+                      onChangeText={(text) => {
+                        this.state.playerNames[i] = text
+                      }}
+                    />
+                  </View>
+                )
+              })
+            }
+            <View style={styles.fixToText}>
+              <TouchableHighlight
+                style={{ ...styles.openButton, backgroundColor: "#43a047", left: "80%" }}
+                onPress={() => {
+                  this.setState({playerNames: this.state.playerNames, playerDetailsModal: false, getPlayerDetails:false})
+                }}
+              >
+                <Text style={styles.textStyle}>Done</Text>
+              </TouchableHighlight>
             </View>
-          </ScrollView>
+        </ScrollView>
         </SafeAreaView>
       </Modal>
     )
@@ -248,5 +260,5 @@ const styles = StyleSheet.create({
   },
   scrollView: {
     marginHorizontal: 20,
-  },
+},
 });
