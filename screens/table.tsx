@@ -14,8 +14,23 @@ export default class Table extends React.Component {
     constructor(props:any){
         super(props);
         this.state ={
-            modalVisible: true
+            modalVisible: true,
+            scoreCard: this.getInitialScoreCard()
         }
+    }
+
+    getInitialScoreCard(){
+        let scoreCard = {
+            name: this.props.gameName,
+            currentRound: 0,
+            pointsTable: {
+
+            }
+        }
+        this.props.players.forEach((player)=>{
+            scoreCard.pointsTable[player] = [...[...Array(this.props.rounds).keys()].map((i)=>{return {i: ""}})]
+        })
+        return scoreCard;
     }
 
     renderModal() {

@@ -181,6 +181,7 @@ export default class NewGame extends React.Component {
       // Alert.alert(this.state.playerNames)
       return (
         <Table numPlayers={this.state.numPlayers}
+          gameName={this.state.gameName}
           players={this.state.playerNames}
           rounds={this.state.numRounds} />
       )
