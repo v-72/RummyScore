@@ -13,7 +13,13 @@ import {
   ScrollView
 
 } from "react-native";
-
+import {
+  AdMobBanner,
+  AdMobInterstitial,
+  PublisherBanner,
+  AdMobRewarded,
+  setTestDeviceIDAsync,
+} from 'expo-ads-admob';
 import Table from './table';
 export default class NewGame extends React.Component {
   constructor(props: any) {
@@ -196,6 +202,13 @@ export default class NewGame extends React.Component {
         {
           this.renderHelper()
         }
+        <View style={{alignSelf:"stretch"}}>
+            <AdMobBanner
+              bannerSize="fullBanner"
+              adUnitID=""
+              servePersonalizedAds={true}
+              onDidFailToReceiveAdWithError={this.bannerError} />
+          </View>
       </View>
     );
   }

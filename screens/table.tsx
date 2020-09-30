@@ -1,83 +1,84 @@
 import React from 'react';
-import { 
-    StyleSheet, 
-    Button, 
-    View, 
-    SafeAreaView, 
-    Text, 
-    Alert, 
-    ScrollView, 
-    Modal 
+import {
+    StyleSheet,
+    Button,
+    View,
+    SafeAreaView,
+    Text,
+    Alert,
+    ScrollView,
+    Modal,
+    TextInput,
+    AsyncStorage
 } from 'react-native';
 
 export default class Table extends React.Component {
-    constructor(props:any){
+    constructor(props: any) {
         super(props);
-        this.state ={
+        this.state = {
             modalVisible: true,
+            rank: {},
             scoreCard: this.getInitialScoreCard()
         }
     }
 
-    getInitialScoreCard(){
+    getInitialScoreCard() {
         let scoreCard = {
             name: this.props.gameName,
             currentRound: 0,
+            date: new Date(),
             pointsTable: {
 
             }
         }
-        this.props.players.forEach((player)=>{
-            scoreCard.pointsTable[player] = [...[...Array(this.props.rounds).keys()].map((i)=>{return {i: ""}})]
+        this.props.players.forEach((player) => {
+            scoreCard.pointsTable[player] = [...Array(parseInt(this.props.rounds)).keys()].map((i) => {
+                let obj = {};
+                obj[i] = 0;
+                return obj
+            })
         })
         return scoreCard;
     }
 
-    renderModal() {
-       return (
-          <Modal
-            animationType="fade"
-            transparent={true}
-            visible={true}
-          >
-            <View >
-                <Text>Test</Text>
-            </View>
-          </Modal>
-        )
-      }
 
-    handlePlayerName(i){
-        if(i !== "Round"){
-            this.renderModal()
-        }
-    }
-
-    getHeaderCell(player:string) {
+    getHeaderCell(player: string) {
         return (
             <View style={styles.cell}>
-                <Text 
-                    style={{ fontWeight: "bold",alignSelf:"center"}} 
-                    onPress={(i) => {this.handlePlayerName(player)}}>
-                        {player}
+                <Text
+                    style={{ fontWeight: "bold", alignSelf: "center" }}
+                    onPress={(i) => { }}>
+                    {player}
                 </Text>
             </View>
         )
     }
+    
+    updateScoreBoard(player, round, data){
+        let scoreCard = this.state.scoreCard;
+        scoreCard.pointsTable[player][round-1][round-1] = parseInt(data);
+        this.setState({scoreCard})
+    }
 
-    getCell(val:any) {
+    getCell(i:any, j:any) {
+        let val = "x";
+        let player = this.props.players[j];
+        val = JSON.stringify(this.state.scoreCard.pointsTable[player][i - 1][i - 1]);
         return (
-            <View style={styles.cell}>
-                <Text 
-                    style={{ fontWeight: "bold",alignSelf:"center"}} 
-                    onPress={() => { Alert.alert("df") }}>
-                        {val}
-                </Text>
+            <View style={styles.cell} doubleTap={() => { Alert.alert(`Player: ${player} Game:${i}`) }}>
+                <TextInput
+                    keyboardType={"numeric"}
+                    maxLength={3}
+                    editable={true}
+                    selectTextOnFocus
+                    defaultValue={val}
+                    onChangeText={(data) => { this.updateScoreBoard(player,i,data) }}
+                />
             </View>
         )
     }
 
-    renderHeader(i:any) {
+    renderHeader(i: any) {
         return (<View style={styles.row} key={i}>
             {this.getHeaderCell("Round")}
             {
@@ -97,8 +98,8 @@ export default class Table extends React.Component {
                 <View style={styles.row} key={i}>
                     <View key={3} style={styles.cell}><Text style={{ fontWeight: "bold", alignSelf: "center" }}>{i}</Text></View>
                     {
-                        [...Array(parseInt(this.props.numPlayers)).keys()].map((i) => {
-                            return this.getCell("")
+                        [...Array(parseInt(this.props.numPlayers)).keys()].map((j) => {
+                            return this.getCell(i, j)
                         })
                     }
                 </View>
@@ -154,5 +155,5 @@ const styles = StyleSheet.create({
         alignItems: "center",
         marginTop: 22,
         marginBottom: 100
-      },
+    },
 });
