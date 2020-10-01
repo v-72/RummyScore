@@ -111,7 +111,7 @@ export default class NewGame extends React.Component {
             <Text style={{ color: "red" }}>{this.state.modalErrorText}</Text>
             <View style={styles.fixToText}>
               <TouchableHighlight
-                style={{ ...styles.openButton, backgroundColor: "#e57373" }}
+                style={{ ...styles.openButton, backgroundColor: "#e57373",width:"40%"}}
                 onPress={() => {
                   this.setModalVisible(!this.state.modalVisible);
                 }}
@@ -119,7 +119,7 @@ export default class NewGame extends React.Component {
                 <Text style={styles.textStyle}>Cancel</Text>
               </TouchableHighlight>
               <TouchableHighlight
-                style={{ ...styles.openButton, backgroundColor: "#43a047", position: "absolute", left: "80%" }}
+                style={{ ...styles.openButton, backgroundColor: "#43a047", position: "absolute", left: "50%", width:"40%"}}
                 onPress={() => {
                   this.setGameDetails(!this.state.modalVisible);
                 }}
@@ -143,6 +143,7 @@ export default class NewGame extends React.Component {
           Alert.alert("Modal has been closed.");
         }}
       >
+        <View style={styles.centeredView}>
         <SafeAreaView style={styles.modalView}>
         <ScrollView style={styles.scrollView}>
         <Text style={{fontWeight: "bold"}}>Please enter player names</Text>
@@ -164,18 +165,19 @@ export default class NewGame extends React.Component {
                 )
               })
             }
-            <View style={styles.fixToText}>
+        </ScrollView>
+        <View style={{flexDirection: 'row',marginTop:"10%"}}>
               <TouchableHighlight
-                style={{ ...styles.openButton, backgroundColor: "#43a047", left: "80%" }}
+                style={{ ...styles.openButton, backgroundColor: "#43a047" ,width:"90%",alignContent:"center"}}
                 onPress={() => {
                   this.setState({playerNames: this.state.playerNames, playerDetailsModal: false, getPlayerDetails:false})
                 }}
               >
-                <Text style={styles.textStyle}>Done</Text>
+                <Text style={{fontWeight: "bold", alignSelf:"center", color:"#fff"}}>Done</Text>
               </TouchableHighlight>
             </View>
-        </ScrollView>
         </SafeAreaView>
+        </View>
       </Modal>
     )
   }
@@ -198,15 +200,14 @@ export default class NewGame extends React.Component {
 
   render() {
     return (
-      <View style={{ flex: 1, alignItems: "center", justifyContent: "center" }}>
+      <View style={{ flex: 1, alignItems: "center", justifyContent: "center"}}>
         {
           this.renderHelper()
         }
-        <View style={{alignSelf:"stretch"}}>
+        <View style={{alignSelf:"stretch",position:"relative",bottom:0}}>
             <AdMobBanner
               bannerSize="fullBanner"
               adUnitID=""
-              servePersonalizedAds={true}
               onDidFailToReceiveAdWithError={this.bannerError} />
           </View>
       </View>
@@ -220,12 +221,13 @@ const styles = StyleSheet.create({
     justifyContent: "center",
     alignItems: "center",
     marginTop: 22,
-    marginBottom: 100
+    marginBottom: 100,
   },
   modalView: {
-    margin: 20,
-    marginLeft: 30,
-    backgroundColor: "white",
+    margin: "1%",
+    marginLeft: "2%",
+    marginRight: "2%",
+    backgroundColor: "#fafafa",
     borderRadius: 20,
     padding: 35,
     alignItems: "baseline",
@@ -248,7 +250,7 @@ const styles = StyleSheet.create({
   textStyle: {
     color: "white",
     fontWeight: "bold",
-    textAlign: "left"
+    textAlign: "center"
   },
   modalText: {
     marginBottom: 5,
@@ -274,6 +276,7 @@ const styles = StyleSheet.create({
     paddingLeft: "5%"
   },
   scrollView: {
-    marginHorizontal: 20,
+    marginHorizontal: "2%",
+    width:"100%"
 },
 });

@@ -59,11 +59,10 @@ class HomeScreen extends React.Component {
           <View>
             <Text style={{ marginTop: 10, textAlign: "right", marginHorizontal: 16, color: "#fff8e1" }}>{APP_VERSION}</Text>
           </View>
-          <View style={{alignSelf:"stretch"}}>
+          <View style={{alignSelf:"stretch", position:"absolute", bottom:0}}>
             <AdMobBanner
               bannerSize="fullBanner"
               adUnitID=""
-              servePersonalizedAds={true}
               onDidFailToReceiveAdWithError={this.bannerError} />
           </View>
         </ImageBackground>
