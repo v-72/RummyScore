@@ -21,10 +21,10 @@ export default class Table extends React.Component {
             scoreCard: this.getInitialScoreCard()
         }
     }
-    getInitialRank(){
+    getInitialRank() {
         let rank = {}
         this.props.players.forEach((player) => {
-            rank[player] =  {
+            rank[player] = {
                 total: 0,
                 rank: 0
             }
@@ -48,45 +48,45 @@ export default class Table extends React.Component {
                 return obj
             })
         })
-        this.storeData(scoreCard,this.props.gameName)
+        this.storeData(scoreCard, this.props.gameName)
         return scoreCard;
     }
 
-    storeData(data:Object, key:string){
-       let _storeData = async (data:Object, key:string) => {
+    storeData(data: Object, key: string) {
+        let _storeData = async (data: Object, key: string) => {
             try {
-              await AsyncStorage.setItem(
-                key,
-                JSON.stringify(data)
-              );
+                await AsyncStorage.setItem(
+                    key,
+                    JSON.stringify(data)
+                );
             } catch (error) {
-              // Error saving data
+                // Error saving data
             }
-          };
-          _storeData(data,key)
+        };
+        _storeData(data, key)
     }
 
     getHeaderCell(player: string) {
         return (
-            <View style={{...styles.cell, backgroundColor: "#607d8b",}}>
+            <View style={{ ...styles.cell, backgroundColor: "#607d8b", }}>
                 <Text
-                    style={{ fontWeight: "bold", alignSelf: "center" , color: "#fff"}}>
+                    style={{ fontWeight: "bold", alignSelf: "center", color: "#fff" }}>
                     {player}
                 </Text>
             </View>
         )
     }
-    
-    updateScoreBoard(player, round, data){
+
+    updateScoreBoard(player, round, data) {
         let scoreCard = this.state.scoreCard;
         let rank = this.state.rank;
-        scoreCard.pointsTable[player][round-1][round-1] = parseInt(data) || 0;
-        rank[player].total = scoreCard.pointsTable[player].reduce((total,obj,i)=>{return total+obj[i]},0);
-        this.storeData(scoreCard,this.props.gameName);
-        this.setState({scoreCard,rank});
+        scoreCard.pointsTable[player][round - 1][round - 1] = parseInt(data) || 0;
+        rank[player].total = scoreCard.pointsTable[player].reduce((total, obj, i) => { return total + obj[i] }, 0);
+        this.storeData(scoreCard, this.props.gameName);
+        this.setState({ scoreCard, rank });
     }
 
-    getCell(i:any, j:any) {
+    getCell(i: any, j: any) {
         let val = "x";
         let player = this.props.players[j];
         val = JSON.stringify(this.state.scoreCard.pointsTable[player][i - 1][i - 1]);
@@ -99,7 +99,7 @@ export default class Table extends React.Component {
                     editable={true}
                     selectTextOnFocus
                     defaultValue={val}
-                    onChangeText={(data) => { this.updateScoreBoard(player,i,data) }}
+                    onChangeText={(data) => { this.updateScoreBoard(player, i, data) }}
                 />
             </View>
         )
@@ -130,8 +130,8 @@ export default class Table extends React.Component {
     renderRow(i: any) {
         if (i === 0) {
             return this.renderHeader(i);
-        } else if(i > parseInt(this.props.rounds) ){
-           return this.renderTotal(i)
+        } else if (i > parseInt(this.props.rounds)) {
+            return this.renderTotal(i)
         } else {
             return (
                 <View style={styles.row} key={i}>
@@ -170,7 +170,7 @@ const styles = StyleSheet.create({
         flex: 1,
         alignItems: 'center',
         justifyContent: 'center',
-        backgroundColor:"#eceff1"
+        backgroundColor: "#eceff1"
     },
     row: {
         flex: 1,
@@ -185,7 +185,7 @@ const styles = StyleSheet.create({
     container: {
         flex: 1,
         marginTop: "5%",
-        width:"100%"
+        width: "100%"
     },
     scrollView: {
         marginHorizontal: 20,

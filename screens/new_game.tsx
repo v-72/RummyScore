@@ -196,8 +196,7 @@ export default class NewGame extends Component {
       <View style={{ flex: 1, alignItems: "center", justifyContent: "center"}}>
         {
           this.renderHelper()
-        }
-       <AdBanner />  
+        }  
       </View>
     );
   }

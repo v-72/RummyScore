@@ -32,14 +32,14 @@ class HomeScreen extends React.Component {
             />
           </View>
           <Separator />
-          <View style={styles.view}>
+          {/* <View style={styles.view}>
             <Button
               title="Help"
               color="#90a4ae"
               onPress={() => Alert.alert('Nothing\'s there to help yet')}
             />
           </View>
-          <Separator />
+          <Separator /> */}
           <View style={styles.view}>
             <Button
               title="About"
@@ -97,6 +97,7 @@ const styles = StyleSheet.create({
     resizeMode: "cover",
     justifyContent: "center"
   },
+  
 });
 
 export default HomeScreen
