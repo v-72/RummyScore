@@ -48,9 +48,23 @@ export default class Table extends React.Component {
                 return obj
             })
         })
+        this.storeData(scoreCard,this.props.gameName)
         return scoreCard;
     }
 
+    storeData(data:Object, key:string){
+       let _storeData = async (data:Object, key:string) => {
+            try {
+              await AsyncStorage.setItem(
+                key,
+                JSON.stringify(data)
+              );
+            } catch (error) {
+              // Error saving data
+            }
+          };
+          _storeData(data,key)
+    }
 
     getHeaderCell(player: string) {
         return (
@@ -68,7 +82,8 @@ export default class Table extends React.Component {
         let rank = this.state.rank;
         scoreCard.pointsTable[player][round-1][round-1] = parseInt(data) || 0;
         rank[player].total = scoreCard.pointsTable[player].reduce((total,obj,i)=>{return total+obj[i]},0);
-        this.setState({scoreCard,rank})
+        this.storeData(scoreCard,this.props.gameName);
+        this.setState({scoreCard,rank});
     }
 
     getCell(i:any, j:any) {

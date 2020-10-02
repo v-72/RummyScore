@@ -37,7 +37,7 @@ class HomeScreen extends React.Component {
             <Button
               title="History"
               color="#90a4ae"
-              onPress={() => Alert.alert('Under construction')}
+              onPress={() => navigate("Game History",{})}
             />
           </View>
           <Separator />
