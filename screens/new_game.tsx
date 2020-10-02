@@ -11,17 +11,10 @@ import {
   Picker,
   SafeAreaView,
   ScrollView
-
 } from "react-native";
-import {
-  AdMobBanner,
-  AdMobInterstitial,
-  PublisherBanner,
-  AdMobRewarded,
-  setTestDeviceIDAsync,
-} from 'expo-ads-admob';
+import  AdBanner from "./ad_banner";
 import Table from './table';
-export default class NewGame extends React.Component {
+export default class NewGame extends Component {
   constructor(props: any) {
     super(props);
     this.state = {
@@ -204,12 +197,7 @@ export default class NewGame extends React.Component {
         {
           this.renderHelper()
         }
-        <View style={{alignSelf:"stretch",position:"relative",bottom:0}}>
-            <AdMobBanner
-              bannerSize="fullBanner"
-              adUnitID=""
-              onDidFailToReceiveAdWithError={this.bannerError} />
-          </View>
+       <AdBanner />  
       </View>
     );
   }

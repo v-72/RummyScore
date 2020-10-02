@@ -1,22 +1,13 @@
 import React from 'react';
 import { StyleSheet, Button, View, SafeAreaView, Text, Alert, ImageBackground } from 'react-native';
-
-import {
-  AdMobBanner,
-  AdMobInterstitial,
-  PublisherBanner,
-  AdMobRewarded,
-  setTestDeviceIDAsync,
-} from 'expo-ads-admob';
-
-
+import  AdBanner from "./ad_banner";
 const Separator = () => (
   <View style={styles.separator} />
 );
 
 const APP_VERSION = "v0.0.1"
 class HomeScreen extends React.Component {
-   render() {
+  render() {
     const { navigate } = this.props.navigation;
     return (
       <SafeAreaView style={styles.container}>
@@ -37,7 +28,7 @@ class HomeScreen extends React.Component {
             <Button
               title="History"
               color="#90a4ae"
-              onPress={() => navigate("Game History",{})}
+              onPress={() => navigate("Game History", {})}
             />
           </View>
           <Separator />
@@ -59,12 +50,7 @@ class HomeScreen extends React.Component {
           <View>
             <Text style={{ marginTop: 10, textAlign: "right", marginHorizontal: 16, color: "#fff8e1" }}>{APP_VERSION}</Text>
           </View>
-          <View style={{alignSelf:"stretch", position:"absolute", bottom:0}}>
-            <AdMobBanner
-              bannerSize="fullBanner"
-              adUnitID=""
-              onDidFailToReceiveAdWithError={this.bannerError} />
-          </View>
+          <AdBanner />
         </ImageBackground>
       </SafeAreaView>
     );
