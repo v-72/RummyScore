@@ -68,9 +68,6 @@ export default class NewGame extends Component {
         animationType="fade"
         transparent={true}
         visible={this.state.modalVisible}
-        onRequestClose={() => {
-          Alert.alert("Modal has been closed.");
-        }}
       >
         <View style={styles.centeredView}>
           <View style={styles.modalView}>
@@ -132,9 +129,6 @@ export default class NewGame extends Component {
         animationType="fade"
         transparent={false}
         visible={this.state.playerDetailsModal}
-        onRequestClose={() => {
-          Alert.alert("Modal has been closed.");
-        }}
       >
         <View style={styles.centeredView}>
         <SafeAreaView style={styles.modalView}>

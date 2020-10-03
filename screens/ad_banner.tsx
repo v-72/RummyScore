@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { View } from "react-native";
 import { AdMobBanner } from 'expo-ads-admob';
-const UNITID = "ca-app-pub-3265178270543067/4439734508";
+const UNITID = "";
 
 export default class AdBanner extends Component {
   render() {
