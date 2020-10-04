@@ -2,12 +2,12 @@
   "expo": {
     "name": "RummyScore",
     "slug": "RummyScore",
-    "version": "0.1.0",
+    "version": "0.1.1",
     "orientation": "portrait",
     "icon": "./assets/icon.png",
     "splash": {
       "image": "./assets/splash.png",
-      "resizeMode": "contain",
+      "resizeMode": "cover",
       "backgroundColor": "#ffffff"
     },
     "updates": {
@@ -21,7 +21,8 @@
     },
     "description": "",
     "android": {
-      "package": "com.alchemystudios.rummyscore"
+      "package": "com.alchemystudios.rummyscore",
+      "enableDangerousExperimentalLeanBuilds": true
     }
   }
 }
