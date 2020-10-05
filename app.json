@@ -21,6 +21,7 @@
     },
     "description": "",
     "android": {
+      "versionCode": 2,
       "package": "com.alchemystudios.rummyscore",
       "enableDangerousExperimentalLeanBuilds": true
     }
