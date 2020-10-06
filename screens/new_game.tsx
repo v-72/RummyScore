@@ -104,6 +104,7 @@ export default class NewGame extends Component {
                 style={{ ...styles.openButton, backgroundColor: "#e57373",width:"40%"}}
                 onPress={() => {
                   this.setModalVisible(!this.state.modalVisible);
+                  this.props.navigation.navigate("Rummy Score", {});
                 }}
               >
                 <Text style={styles.textStyle}>Cancel</Text>

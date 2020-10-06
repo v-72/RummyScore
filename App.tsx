@@ -7,9 +7,9 @@ import {createStackNavigator} from 'react-navigation-stack';
 
 const AppNavigator = createStackNavigator(  
   {  
-    "Rummy Score": HomeScreen,  
-    "New Game": NewGame,
-    "Game History": GameHistory
+    "Rummy Score": {screen: HomeScreen},  
+    "New Game": {screen: NewGame},
+    "Game History": {screen: GameHistory}
   },  
   {  
       initialRouteName: "Rummy Score"
