@@ -1,9 +1,13 @@
 import React, { Component } from 'react';
-import { View } from "react-native";
+import { Alert, View } from "react-native";
 import { AdMobBanner } from 'expo-ads-admob';
 const UNITID = "";
 
 export default class AdBanner extends Component {
+  bannerError(){
+    Alert.alert("Error in loading banner");
+  }
+
   render() {
     return (
       <View style={{ alignSelf: "stretch", position: "absolute", bottom: 0 }}>
