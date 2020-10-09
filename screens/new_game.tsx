@@ -23,7 +23,7 @@ export default class NewGame extends Component {
       numRounds: "13",
       numPlayers: "2",
       modalVisible: true,
-      numRoundsDefault: ["7", "13"],
+      numRoundsDefault: ["3","7", "13"],
       modalErrorText: "",
       getPlayerDetails: false,
       playerDetailsModal: true
