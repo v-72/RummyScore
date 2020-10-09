@@ -1,13 +1,11 @@
 import React from 'react';
 import {
     StyleSheet,
-    Button,
     View,
     SafeAreaView,
     Text,
     Alert,
     ScrollView,
-    Modal,
     TextInput,
     AsyncStorage
 } from 'react-native';
